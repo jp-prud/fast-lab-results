@@ -1,9 +1,8 @@
+import drugsRouter from '@modules/drugs/routes/drugs.routes';
 import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', (request, response) => {
-  response.json({ message: 'Hello' });
-});
+router.use('/drugs', drugsRouter);
 
 export default router;
