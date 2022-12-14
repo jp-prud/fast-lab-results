@@ -10,7 +10,7 @@ export default class DrugsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listDrugService = new ListDrugService();
 
-    const drugs = listDrugService.execute();
+    const drugs = await listDrugService.execute();
 
     return response.status(200).json(drugs);
   }
@@ -46,7 +46,7 @@ export default class DrugsController {
       data: { name, shortDescription },
     });
 
-    return response.status(201);
+    return response.sendStatus(204);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
@@ -56,6 +56,6 @@ export default class DrugsController {
 
     await deleteDrugService.execute({ id });
 
-    return response.status(201);
+    return response.sendStatus(204);
   }
 }
