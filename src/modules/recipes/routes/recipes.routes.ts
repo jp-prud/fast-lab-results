@@ -1,3 +1,4 @@
+import { celebrate, Joi, Segments } from 'celebrate';
 import Router from 'express';
 import RecipesController from '../controllers/RecipesController';
 
@@ -5,9 +6,33 @@ const recipesRouter = Router();
 const recipesController = new RecipesController();
 
 recipesRouter.get('/', recipesController.index);
-recipesRouter.get('/:id', recipesController.show);
-recipesRouter.post('/', recipesController.store);
+
+recipesRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  recipesController.show,
+);
+
+recipesRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      title: Joi.string().max(150).required(),
+      shortDescription: Joi.string().required(),
+      medicName: Joi.string().max(100).required(),
+      documentPath: Joi.string().required(),
+      relatedDrugs: Joi.array().items(Joi.string()),
+    },
+  }),
+  recipesController.store,
+);
+
 recipesRouter.patch('/:id', recipesController.update);
+
 recipesRouter.delete('/:id', recipesController.delete);
 
 export default recipesRouter;
