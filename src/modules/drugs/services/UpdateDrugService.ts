@@ -1,5 +1,5 @@
 import { getCustomRepository, UpdateResult } from 'typeorm';
-import { DrugsRepository } from '../typeorm/repositories/DrugsRepository';
+import { DrugsRepository } from '../repositories/DrugsRepository';
 import AppError from '@shared/errors/AppError';
 
 interface IRequest {
@@ -27,7 +27,7 @@ class UpdateDrugService {
       throw new AppError('Drug with this name is already exists');
     }
 
-    const updatedDrug = drugsRepository.update(id, {
+    const updatedDrug = await drugsRepository.update(id, {
       name,
       shortDescription,
     });
