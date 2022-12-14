@@ -31,8 +31,31 @@ recipesRouter.post(
   recipesController.store,
 );
 
-recipesRouter.patch('/:id', recipesController.update);
+recipesRouter.patch(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+    [Segments.BODY]: {
+      title: Joi.string().max(150).required(),
+      shortDescription: Joi.string().required(),
+      medicName: Joi.string().max(100).required(),
+      documentPath: Joi.string().required(),
+      relatedDrugs: Joi.array().items(Joi.string()),
+    },
+  }),
+  recipesController.update,
+);
 
-recipesRouter.delete('/:id', recipesController.delete);
+recipesRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  recipesController.delete,
+);
 
 export default recipesRouter;
