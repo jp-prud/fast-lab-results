@@ -28,7 +28,7 @@ drugsRouter.post(
   drugsController.store,
 );
 
-drugsRouter.put(
+drugsRouter.patch(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
