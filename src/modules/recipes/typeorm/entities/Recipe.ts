@@ -7,8 +7,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import Consumer from '@modules/consumers/entities/Consumer';
 import Drug from '@modules/drugs/typeorm/entities/Drug';
+import Consumer from '@modules/consumers/typeorm/entities/Consumer';
 
 @Entity('recipe')
 export default class Recipe {
