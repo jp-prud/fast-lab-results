@@ -23,7 +23,7 @@ class UpdateDrugService {
 
     const drugsIsAlreadyExists = await drugsRepository.findByName(name);
 
-    if (drugsIsAlreadyExists && name !== drug.name) {
+    if (drugsIsAlreadyExists && id !== drug.id) {
       throw new AppError('Drug with this name is already exists');
     }
 
