@@ -5,7 +5,11 @@ import Recipe from '../typeorm/entities/Recipe';
 export default class ListRecipeService {
   public async execute(): Promise<Recipe[]> {
     const recipeRepository = getCustomRepository(RecipeRepository);
-    const recipes = await recipeRepository.find();
+    const recipes = await recipeRepository.find({
+      order: {
+        title: 'ASC',
+      },
+    });
     return recipes;
   }
 }
