@@ -25,7 +25,10 @@ recipesRouter.post(
       shortDescription: Joi.string().required(),
       medicName: Joi.string().max(100).required(),
       documentPath: Joi.string().required(),
-      relatedDrugs: Joi.array().items(Joi.string()),
+      relatedDrugs: Joi.array()
+        .items(Joi.string().uuid().required())
+        .required(),
+      consumer: Joi.string(),
     },
   }),
   recipesController.store,
@@ -49,13 +52,21 @@ recipesRouter.patch(
 );
 
 recipesRouter.delete(
+
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
+
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
   recipesController.delete,
+,
 );
 
 export default recipesRouter;
