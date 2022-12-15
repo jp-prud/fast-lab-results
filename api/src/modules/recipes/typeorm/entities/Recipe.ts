@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import Drug from '@modules/drugs/typeorm/entities/Drug';
@@ -27,7 +29,12 @@ export default class Recipe {
   @Column()
   documentPath: string;
 
-  @ManyToOne(type => Drug, recipes => Recipe, { eager: true })
+  @ManyToMany(type => Drug, {
+    eager: true,
+    onUpdate: 'NO ACTION',
+    onDelete: 'DEFAULT',
+  })
+  @JoinTable()
   relatedDrugs: Drug;
 
   @ManyToOne(type => Consumer, recipes => Recipe)

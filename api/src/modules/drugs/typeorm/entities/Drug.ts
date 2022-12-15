@@ -1,11 +1,9 @@
-import Recipe from '@modules/recipes/typeorm/entities/Recipe';
 import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  OneToMany,
 } from 'typeorm';
 
 @Entity('drug')
@@ -18,9 +16,6 @@ export default class Drug {
 
   @Column()
   shortDescription: string;
-
-  @OneToMany(type => Recipe, relatedDrugs => Drug)
-  recipes: Recipe[];
 
   @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
