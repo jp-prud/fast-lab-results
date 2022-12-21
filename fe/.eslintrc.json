@@ -7,6 +7,8 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
+    "airbnb-typescript",
+    "plugin:react/jsx-runtime",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -19,7 +21,8 @@
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
